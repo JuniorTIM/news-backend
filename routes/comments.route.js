@@ -1,7 +1,7 @@
 const { Router } = require("express");
 
 const { commentsController } = require("../controllers/comments.controller");
-const authMiddleware = require('../models/middlewares/auth.middleware')
+const authMiddleware = require('../middlewares/auth.middleware')
 
 const router = Router();
 
