@@ -4,6 +4,7 @@ module.exports.newsControllers = {
   createNews: async (req, res) => {
     try {
       await News.create({
+        img: req.body.img,
         title: req.body.title,
         text: req.body.text,
         categoryId: req.body.categoryId,

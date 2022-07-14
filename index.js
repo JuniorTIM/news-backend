@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/assets/img', express.static(__dirname + '/assets/img'));
 
 app.use(require("./routes/index"));
 
@@ -14,5 +15,5 @@ mongoose
   .catch((e) => console.log("Ошибка при соединии с сервером:" + e.message));
   
   app.listen(process.env.PORT, () => {
-  console.log("Server is working");
+  console.log("Сервер работает");
 });

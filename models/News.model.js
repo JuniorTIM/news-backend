@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const newsSchema = mongoose.Schema({
+  img: String,
   title: String,  
   text: String,
   categoryId: {

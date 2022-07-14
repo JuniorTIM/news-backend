@@ -4,6 +4,17 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports.userControllers = {
+  getUsers: async (req, res) => {
+    try {
+      const users = await User.find()
+      res.json(users)
+    } catch (e) {
+      return res.status(400).json({
+        error: e.message
+      })
+    }
+  },
+
   createUser: async (req, res) => {
     try {
     const { login, password } = req.body;
@@ -48,12 +59,13 @@ module.exports.userControllers = {
   
       const payload = {
         id: candidate._id,
+        login: candidate.login,
       }
   
       const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
         expiresIn: "24h",
       })
-      res.json({token});
+      res.json({token, name: payload.login, user: payload.id});
     } catch (e) {
       res.json(e.message)
     }
