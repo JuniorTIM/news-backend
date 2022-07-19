@@ -18,7 +18,7 @@ module.exports.newsControllers = {
 
   deleteNews: async (req, res) => {
     try {
-     await News.findById(req.params.id);
+     await News.findByIdAndDelete(req.params.id);
       res.json("Новость удалена");
     } catch (e) {
       res.json(e.message);

@@ -7,7 +7,7 @@ const router = Router();
 
 router.get("/news", newsControllers.getNews);
 router.get("/news/:id", newsControllers.getNewsByCategory);
-router.post("/admin/news", authMiddleware, newsControllers.createNews);
-router.delete("/admin/news/:id", authMiddleware, newsControllers.deleteNews);
+router.post("/news", newsControllers.createNews);
+router.delete("/news/:id", newsControllers.deleteNews);
 
 module.exports = router;

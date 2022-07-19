@@ -17,11 +17,11 @@ module.exports.userControllers = {
 
   createUser: async (req, res) => {
     try {
-    const { login, password } = req.body;
+    const { login, password, role } = req.body;
 
     const hash = await bcrypt.hash(password, Number(process.env.BCRYPT_ROUNDS));
 
-    const user = await User.create({ login: login, password: hash });
+    const user = await User.create({ login: login, password: hash, role: role });
 
     res.json(user);
     } catch (e) {
@@ -60,12 +60,13 @@ module.exports.userControllers = {
       const payload = {
         id: candidate._id,
         login: candidate.login,
+        role: candidate.role
       }
   
       const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
         expiresIn: "24h",
       })
-      res.json({token, name: payload.login, user: payload.id});
+      res.json({token, name: payload.login, user: payload.id, role: payload.role});
     } catch (e) {
       res.json(e.message)
     }

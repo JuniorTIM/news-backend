@@ -20,7 +20,7 @@ module.exports.commentsController = {
     try {
       const comment = await Comment.findById(id)
 
-      if (comment.name.toString() === req.user.id) {
+      if (comment.name.toString() === req.user.id || req.user.role === true) {
       await comment.remove()
       return res.json('Задача удалена');
       }
