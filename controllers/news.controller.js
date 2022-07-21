@@ -3,16 +3,15 @@ const News = require("../models/News.model");
 module.exports.newsControllers = {
   createNews: async (req, res) => {
     try {
-      await News.create({
-        img: req.body.img,
+      const news = await News.create({
+        img: req.file.path,
         title: req.body.title,
         text: req.body.text,
         categoryId: req.body.categoryId,
-      }).then(() => {
-        res.json("Новость добавлена");
-      });
+      })
+        return res.json(news);
     } catch (e) {
-      e.message;
+     res.json( {error: e.message})
     }
   },
 
